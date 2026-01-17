@@ -5,6 +5,7 @@
 
 Check:
 nvcc --version
+
 # CUDA Installation on Ubuntu 22.04 for NVIDIA H200 (Hopper)
 
 This repository documents the step-by-step process to install **NVIDIA CUDA Toolkit (12.4+)** and **R550+ Data Center Driver** on **Ubuntu 22.04** for **NVIDIA H200 (Hopper, SM 9.0) GPU servers**.
