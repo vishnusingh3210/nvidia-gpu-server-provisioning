@@ -1,130 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>NVIDIA GPU Setup Documentation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA GPU Server Provisioning</title>
 
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0d1117;
-      color: #c9d1d9;
-      margin: 0;
-      padding: 0;
-    }
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    header {
-      background: #161b22;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #30363d;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #0f172a, #020617);
+    color: #e5e7eb;
+}
 
-    header h1 {
-      margin: 0;
-      color: #58a6ff;
-    }
+/* HEADER */
+header {
+    padding: 70px 20px;
+    text-align: center;
+    background: radial-gradient(circle at top, #1e293b, #020617);
+}
 
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
+header h1 {
+    font-size: 44px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #22c55e, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-    section {
-      margin-bottom: 30px;
-    }
+header p {
+    font-size: 18px;
+    color: #cbd5f5;
+}
 
-    h2 {
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 5px;
-      color: #58a6ff;
-    }
+/* NAV */
+nav {
+    position: sticky;
+    top: 0;
+    background: #020617;
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #1e293b;
+    z-index: 100;
+}
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+nav a {
+    color: #93c5fd;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+}
 
-    li {
-      margin: 10px 0;
-    }
+nav a:hover {
+    color: #22c55e;
+}
 
-    a {
-      color: #79c0ff;
-      text-decoration: none;
-      font-size: 16px;
-    }
+/* CONTAINER */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px 20px;
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+section {
+    margin-bottom: 80px;
+}
 
-    .gpu-images img {
-      width: 200px;
-      margin: 10px;
-      border-radius: 6px;
-      border: 1px solid #30363d;
-      background: #161b22;
-      padding: 5px;
-    }
+h2 {
+    font-size: 30px;
+    margin-bottom: 25px;
+    border-left: 5px solid #22c55e;
+    padding-left: 14px;
+}
 
-    footer {
-      text-align: center;
-      padding: 15px;
-      border-top: 1px solid #30363d;
-      font-size: 14px;
-      color: #8b949e;
-    }
-  </style>
+/* DOC LINKS */
+.doc-list {
+    list-style: none;
+    padding: 0;
+}
+
+.doc-list li {
+    margin: 12px 0;
+}
+
+.doc-list a {
+    color: #79c0ff;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.doc-list a:hover {
+    text-decoration: underline;
+    color: #22c55e;
+}
+
+/* GPU CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #020617;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 30px 80px rgba(34,197,94,0.3);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin: 10px 0;
+    color: #22c55e;
+}
+
+.card p {
+    font-size: 14px;
+    color: #cbd5f5;
+}
+
+/* CODE */
+code {
+    background: #020617;
+    padding: 6px 8px;
+    border-radius: 6px;
+    color: #22c55e;
+}
+
+/* FOOTER */
+footer {
+    background: #020617;
+    text-align: center;
+    padding: 30px;
+    color: #94a3b8;
+    border-top: 1px solid #1e293b;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <h1>NVIDIA GPU Server Setup Guide</h1>
-  <p>Driver, CUDA, and Validation Documentation</p>
+<header data-aos="fade-down">
+    <h1>NVIDIA GPU Server Provisioning</h1>
+    <p>Enterprise GPU Infrastructure • AI • HPC • Data Centers</p>
 </header>
 
-<main>
+<nav>
+    <a href="#overview">Overview</a>
+    <a href="#docs">Documentation</a>
+    <a href="#gpus">GPU Models</a>
+    <a href="#validation">Validation</a>
+    <a href="#diagnostics">Diagnostics</a>
+</nav>
 
-  <section>
-    <h2>📘 Documentation Sections</h2>
-    <ul>
-      <li>📌 <a href="01-introduction/">01 - Introduction</a></li>
-      <li>🖥️ <a href="02-gpu-models/">02 - Supported GPU Models</a></li>
-      <li>⚙️ <a href="03-hardware-prechecks/">03 - Hardware Prechecks</a></li>
-      <li>💿 <a href="04-os-installation/">04 - OS Installation</a></li>
-      <li>🔧 <a href="05-driver-installation/">05 - NVIDIA Driver Installation</a></li>
-      <li>🚀 <a href="06-cuda-installation/">06 - CUDA Installation</a></li>
-      <li>✅ <a href="07-validation/">07 - GPU Validation</a></li>
-      <li>🛠️ <a href="08-logs-diagnostics/">08 - Logs & Diagnostics</a></li>
-    </ul>
-  </section>
+<div class="container">
 
-  <section>
-    <h2>🧠 Supported NVIDIA GPUs</h2>
-    <div class="gpu-images">
-      <img src="Nvidia-B200.png" alt="NVIDIA B200">
-      <img src="Nvidia-H100.png" alt="NVIDIA H100">
-      <img src="Nvidia-H200.png" alt="NVIDIA H200">
-      <img src="Nvidia-L40S.png" alt="NVIDIA L40S">
+<section id="overview" data-aos="fade-up">
+<h2>Project Overview</h2>
+<p>
+This repository provides a complete, production-ready guide for provisioning NVIDIA GPU servers.
+It covers BIOS & hardware validation, OS installation, NVIDIA driver and CUDA setup,
+GPU validation, and diagnostics for AI and HPC workloads.
+</p>
+</section>
+
+<section id="docs" data-aos="fade-up">
+<h2>Documentation Sections</h2>
+<ul class="doc-list">
+<li>📘 <a href="01-introduction/">01 – Introduction</a></li>
+<li>🖥️ <a href="02-gpu-models/">02 – Supported GPU Models</a></li>
+<li>⚙️ <a href="03-hardware-prechecks/">03 – Hardware Prechecks</a></li>
+<li>💿 <a href="04-os-installation/">04 – OS Installation</a></li>
+<li>🔧 <a href="05-driver-installation/">05 – NVIDIA Driver Installation</a></li>
+<li>🚀 <a href="06-cuda-installation/">06 – CUDA Installation</a></li>
+<li>✅ <a href="07-validation/">07 – GPU Validation</a></li>
+<li>🛠️ <a href="08-logs-diagnostics/">08 – Logs & Diagnostics</a></li>
+<li>📄 <a href="README.md">Project README</a></li>
+</ul>
+</section>
+
+<section id="gpus">
+<h2 data-aos="fade-right">Supported NVIDIA GPUs</h2>
+
+<div class="cards">
+    <div class="card" data-aos="zoom-in">
+        <img src="Nvidia-H100.png">
+        <h3>NVIDIA H100</h3>
+        <p>Hopper architecture for LLM training, HPC, and AI research.</p>
     </div>
-  </section>
 
-  <section>
-    <h2>📄 Repository</h2>
-    <p>
-      <a href="README.md">📘 View Full README</a>
-    </p>
-  </section>
+    <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <img src="Nvidia-H200.png">
+        <h3>NVIDIA H200</h3>
+        <p>High-memory Hopper GPU for large-scale AI workloads.</p>
+    </div>
 
-</main>
+    <div class="card" data-aos="zoom-in" data-aos-delay="200">
+        <img src="Nvidia-B200.png">
+        <h3>NVIDIA B200</h3>
+        <p>Blackwell architecture for next-generation AI factories.</p>
+    </div>
+
+    <div class="card" data-aos="zoom-in" data-aos-delay="300">
+        <img src="Nvidia-L40S.png">
+        <h3>NVIDIA L40S</h3>
+        <p>Enterprise inference, visualization, and VDI workloads.</p>
+    </div>
+</div>
+</section>
+
+<section id="validation" data-aos="fade-up">
+<h2>Validation Commands</h2>
+<ul>
+<li><code>nvidia-smi</code></li>
+<li><code>nvidia-smi -L</code></li>
+<li><code>nvidia-smi topo -m</code></li>
+<li><code>nvcc --version</code></li>
+<li><code>lspci | grep -i nvidia</code></li>
+</ul>
+</section>
+
+<section id="diagnostics" data-aos="fade-up">
+<h2>Diagnostics & Logs</h2>
+<ul>
+<li><code>dmesg | grep nvidia</code></li>
+<li><code>nvidia-bug-report.sh</code></li>
+<li>Thermal, power & driver health analysis</li>
+</ul>
+</section>
+
+</div>
 
 <footer>
-  © 2026 • NVIDIA GPU Setup Documentation • GitHub Pages
+<p>Created by Vishnu Singh • NVIDIA GPU Infrastructure Documentation</p>
 </footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({
+    duration: 1200,
+    once: true
+});
+</script>
 
 </body>
 </html>
