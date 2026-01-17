@@ -25,7 +25,7 @@ The steps follow NVIDIA’s recommended **APT-based installation method**, suita
 
 ---
 
-## 1️⃣ Verify System
+## 1️⃣ Verify System   
 
 ```bash
 lsb_release -a
